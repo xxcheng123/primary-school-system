@@ -1,0 +1,22 @@
+syntax = "v1"
+
+import "swiper.api"
+
+info (
+	title:  "Primary School System"
+	desc:   "黄冈师范学院2024届论文：通用小学网站"
+	author: "xxcheng"
+	email:  "developer@xxcheng.cn"
+)
+
+type Ping {}
+
+type Pong {
+	Pong string `json:"pong"`
+}
+
+service school {
+	@handler Ping
+	get /ping (Ping) returns (Pong)
+}
+

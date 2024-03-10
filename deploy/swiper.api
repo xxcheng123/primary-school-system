@@ -1,0 +1,33 @@
+syntax = "v1"
+
+type SwiperInfo {
+    Id         int64  `json:"id"`
+    Title      string `json:"title"`
+    Url        string `json:"url"`
+    Img        string `json:"img"`
+    Order      int64  `json:"order"`
+    Status     int64  `json:"status"`
+    UpdateTime int64  `json:"updateTime"`
+}
+
+
+type SwiperIndexReq {
+	Index int64 `form:"index,optional,range=[0:]"`
+	Size  int64 `form:"size,optional,range=[0:]"`
+}
+
+type SwiperIndexResp{
+    Total int64 `json:"total"`
+    Index int64 `json:"index"`
+    Size int64 `json:"size"`
+    List []*SwiperInfo `json:"list"`
+}
+
+@server (
+    group: swiper
+    prefix: /swiper
+)
+service school{
+    @handler SwiperIndex
+    get /index(SwiperIndexReq)returns(SwiperIndexResp)
+}

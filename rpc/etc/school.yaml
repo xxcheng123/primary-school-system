@@ -1,0 +1,22 @@
+Name: school.rpc
+ListenOn: 0.0.0.0:9433
+
+DatabaseConf:
+  Type: mysql
+  Host: 192.168.21.100
+  Port: 3306
+  DBName: lunwen
+  Username: lunwen_admin # set your username
+  Password: "a12345678" # set your password
+  MaxOpenConn: 100
+  SSLMode: disable # disable or require
+  CacheTime: 5
+
+Telemetry:
+  Name: school.rpc
+  Endpoint: https://zipkin-dev.xxcheng.cn/api/v2/spans
+  Sampler: 1.0
+  Batcher: zipkin
+
+Log:
+  Encoding: plain

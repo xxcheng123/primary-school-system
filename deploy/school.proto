@@ -1,0 +1,218 @@
+syntax = "proto3";
+
+package pb;
+option go_package="./pb";
+
+message Request {
+  string ping = 1;
+}
+
+message Response {
+  string pong = 1;
+}
+
+service Base {
+  rpc Ping(Request) returns(Response);
+}
+
+
+message CreateUserReq{
+  string username=1;
+  string password=2;
+  optional int64 role=3;
+  string name=4;
+}
+
+message CreateUserResp{
+  int64 id=1;
+  string username=2;
+  int64 role=3;
+  string name=4;
+}
+
+message LoginUserReq{
+  string username=1;
+  string password=2;
+}
+
+message GetInfoUserReq{
+  int64 id=1;
+}
+
+message UserInfo {
+  int64 id=1;
+  string username=2;
+  int64 role=3;
+  int64 status=4;
+  int64 updatedAt=5;
+  string name=6;
+}
+message InfoUserResp{
+  int64 code=1;
+  optional UserInfo info=2;
+}
+
+
+service User {
+  rpc CreateUser(CreateUserReq) returns(CreateUserResp);
+
+  rpc LoginUser(LoginUserReq) returns(InfoUserResp);
+
+  rpc GetInfoUser(GetInfoUserReq) returns(InfoUserResp);
+}
+
+
+message CreateCategoryReq{
+  string name=1;
+  optional int64 parentId=2;
+}
+
+
+message GetCategoryReq{
+  int64 id=1;
+}
+
+message CategoryInfo {
+  int64 id=1;
+  string name=2;
+  int64 parentId=3;
+  int64 status=4;
+}
+
+message GetListCategoryReq{
+  optional int64 parentId=1;
+  optional int64 index=2;
+  optional int64 limit=3;
+}
+message ListCategoryResp{
+  int64 total=1;
+  int64 index=2;
+  int64 limit=3;
+  repeated CategoryInfo list=4;
+}
+
+
+service Category {
+  rpc CreateCategory(CreateCategoryReq) returns(CategoryInfo);
+
+  rpc GetCategory(GetCategoryReq) returns(CategoryInfo);
+
+  rpc GetListCategory(GetListCategoryReq) returns(ListCategoryResp);
+}
+
+message CreateArticleReq{
+  int64 userId=1;
+  int64 categoryId=2;
+  string title=3;
+  string content=4;
+  optional int64 status=5;
+  optional  string img=6;
+}
+
+message CreateArticleResp{
+  int64 id=1;
+}
+
+message ArticleInfo{
+  int64 id=1;
+  int64 userId=2;
+  int64 categoryId=3;
+  string title=4;
+  string content=5;
+  int64 status=6;
+  string img=7;
+}
+
+message GetInfoArticleReq{
+  int64 id=1;
+}
+
+message GetListArticleReq{
+  optional int64 userId=1;
+  optional int64 categoryId=2;
+  optional int64 index=3;
+  optional int64 limit=4;
+  optional bool includeSubCategory=5;
+}
+
+message GetListArticleResp{
+  int64 total=1;
+  int64 index=2;
+  int64 limit=3;
+  repeated ArticleInfo list=4;
+}
+
+service Article {
+  rpc CreateArticle(CreateArticleReq) returns(CreateArticleResp);
+
+  rpc GetArticle(GetInfoArticleReq) returns(ArticleInfo);
+
+  rpc GetListArticle(GetListArticleReq) returns(GetListArticleResp);
+}
+
+
+
+//轮播图服务
+message AddSwiperReq{
+  string title=1;
+  string url=2;
+  optional string img=3;
+  optional int64 order=4;
+  optional int64 status=5;
+}
+
+message InfoSwiper{
+  int64 id=1;
+  string title=2;
+  string url=3;
+  string img=4;
+  int64 order=5;
+  int64 status=6;
+  int64 updateTime=7;
+}
+
+message OperateSwiperReq{
+  string opType=1;
+  int64 id=2;
+}
+message OperateSwiperResp{
+  int64 id=1;
+  int64 code=2;
+}
+
+message ListSwiperReq{
+  optional int64 index=1;
+  optional int64 limit=2;
+}
+
+message ListSwiperResp{
+  int64 total=1;
+  int64 index=2;
+  int64 limit=3;
+  repeated InfoSwiper list=4;
+}
+
+message UpdateSwiperReq{
+  int64 id=1;
+  optional string title=2;
+  optional string url=3;
+  optional string img=4;
+  optional int64 order=5;
+  optional int64 status=6;
+}
+
+service Swiper{
+  rpc AddSwiper(AddSwiperReq)returns(InfoSwiper);
+
+  // OperateSwiper 简单编辑轮播图
+  // 上架 -> up
+  // 下架 -> down
+  // 删除 -> del
+  rpc OperateSwiper(OperateSwiperReq)returns(OperateSwiperResp);
+
+  // ListSwiper 轮播图列表
+  rpc ListSwiper(ListSwiperReq)returns(ListSwiperResp);
+
+  // UpdateSwiper 更新轮播图
+  rpc UpdateSwiper(UpdateSwiperReq)returns(InfoSwiper);
+}

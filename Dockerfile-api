@@ -1,0 +1,22 @@
+FROM alpine:3.19
+
+ARG PROJECT=school
+ARG CONFIG_FILE=school.yaml
+ARG AUTHOR="developer@xxcheng.cn"
+
+LABEL org.opencontainers.image.authors=${AUTHOR}
+
+WORKDIR /app
+ENV PROJECT=${PROJECT}
+ENV CONFIG_FILE=${CONFIG_FILE}
+
+ENV TZ=Asia/Shanghai
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+RUN apk update --no-cache && apk add --no-cache tzdata
+
+COPY ./build/${PROJECT}_api ./
+COPY ./api/etc/${CONFIG_FILE} ./etc/
+
+EXPOSE 9432
+
+ENTRYPOINT ./${PROJECT}_api -f etc/${CONFIG_FILE}

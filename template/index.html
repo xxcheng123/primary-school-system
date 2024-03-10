@@ -1,0 +1,250 @@
+{{ define "index.html" }}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="description" content="{{.Name}} - {{.Title}}" />
+    <title>{{.Name}} - {{.Title}}</title>
+    <meta name="keywords" content="{{.Name}},{{.Title}}" />
+    <link rel="stylesheet" href="./css/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="./css/common.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/simplenews.css" />
+
+    <script src="./js/jquery-2.x.min.js"></script>
+    <script src="./js/swiper-bundle.min.js"></script>
+    <script src="./js/axios.min.js"></script>
+    <script>
+      var pageData={{.JSON}};
+      console.log(pageData)
+    </script>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- 头部 -->
+      <header class="header-box">
+        <div class="header">
+          <div>
+            <a href="{站点URL}" class="logo item" title="{{.Name}}">
+              <img src="./images/logo.png" alt="{{.Name}}" />
+            </a>
+            <div class="title item">
+              <span> {{.Name}} </span>
+            </div>
+          </div>
+        </div>
+      </header>
+      {{template "category.html" .Category}}
+      <!-- 头部 轮播图 -->
+      {{template "swiper.html" .Swiper}}
+      <!-- 热点新闻中心 -->
+      <div class="hot-news-box">
+        <div class="hot-news-main">
+          <!-- 图片新闻 -->
+          <div class="news-left" frag="面板03">
+            <div frag="窗口03" class="frag-tag frag-main-03">
+              <div frag="窗口内容">窗口内容</div>
+            </div>
+          </div>
+          <!-- 文字新闻 -->
+          <div class="news-right">
+            <h3 class="news-title">
+              <a href="@V_URL[L:S118:C4554]">
+                <span class="title">通知公告</span>
+                <span class="split">/</span>
+                <span class="en">NOTICE NOTICE</span>
+              </a>
+            </h3>
+
+            <ul frag="面板04" class="news-list">
+              <div frag="窗口04" class="frag-tag frag-main-04">
+                <div frag="窗口内容">
+                  <li class="news-item">
+                    <a target="_blank" href="{文章URL}">
+                      <div
+                        class="time hov_dif date-tag-ref"
+                        data-date="{发布时间}"
+                      >
+                        <p class="day hov_dif">01</p>
+                        <p class="year_month hov_dif">2023-01</p>
+                      </div>
+                      <div class="content hov_dif">
+                        <h3 class="title hov_dif">{标题}</h3>
+                        <p class="desc hov_dif">{简介}</p>
+                      </div>
+                    </a>
+                  </li>
+                </div>
+              </div>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- 主题新闻中心 -->
+      <div class="topic-news-box">
+        <!-- 新闻控制器 -->
+        <div class="news-controller">
+          <style>
+            .topic-news-title .title {
+              font-size: 28px !important;
+              letter-spacing: 8px;
+            }
+            .topic-news-title {
+              padding-top: 25px !important;
+              text-align: center;
+            }
+          </style>
+          <div class="item topic-news-title" data-id="0">
+            <a href="@V_URL[L:S118:C4563]"
+              ><strong class="title">党建动态</strong></a
+            >
+            <span class="topic-news-title-s"></span>
+          </div>
+          <div class="item topic-news-title" data-id="1">
+            <a href="@V_URL[L:S118:C4566]"
+              ><strong class="title">机关党建</strong></a
+            >
+            <span class="topic-news-title-s"></span>
+          </div>
+          <div class="item topic-news-title" data-id="2">
+            <a href="javascript:void(0)"
+              ><strong class="title">教育培训</strong></a
+            >
+            <span class="topic-news-title-s"></span>
+          </div>
+        </div>
+        <!-- 新闻展示区 -->
+        <div class="news-list">
+          <div class="topic-news-swiper">
+            <div class="swiper-wrapper" id="topic-news-swiper-wrapper">
+              <div class="swiper-slide" frag="面板05">
+                <ul frag="窗口05" class="frag-tag frag-main-05">
+                  <div frag="窗口内容">
+                    <li class="item">
+                      <a href="{文章URL}" target="_blank">
+                        <div class="time date-tag-ref" data-date="{发布时间}">
+                          <p class="day">13</p>
+                          <p class="year_month">2023-03</p>
+                        </div>
+                        <div class="content">
+                          <h3 class="title">{标题}</h3>
+                          <p class="desc">{简介}</p>
+                        </div>
+                      </a>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+
+              <div class="swiper-slide" frag="面板06">
+                <ul frag="窗口06" class="frag-tag frag-main-06">
+                  <div frag="窗口内容">
+                    <li class="item">
+                      <a href="{文章URL}" target="_blank">
+                        <div class="time date-tag-ref" data-date="{发布时间}">
+                          <p class="day">13</p>
+                          <p class="year_month">2023-03</p>
+                        </div>
+                        <div class="content">
+                          <h3 class="title">{标题}</h3>
+                          <p class="desc">{简介}</p>
+                        </div>
+                      </a>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+
+              <div class="swiper-slide" frag="面板07">
+                <ul frag="窗口07" class="frag-tag frag-main-07">
+                  <div frag="窗口内容">
+                    <li class="item">
+                      <a href="{文章URL}" target="_blank">
+                        <div class="time date-tag-ref" data-date="{发布时间}">
+                          <p class="day">13</p>
+                          <p class="year_month">2023-03</p>
+                        </div>
+                        <div class="content">
+                          <h3 class="title">{标题}</h3>
+                          <p class="desc">{简介}</p>
+                        </div>
+                      </a>
+                    </li>
+                  </div>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 主题教育 -->
+      <div class="tpoic-edu-box">
+        <div class="list-box" frag="面板88">
+          <div class="title">
+            <h3 class="news-title">
+              <span class="title">主题教育</span>
+            </h3>
+          </div>
+          <div class="list frag-tag frag-main-88" frag="窗口88">
+            <div frag="窗口内容"></div>
+          </div>
+        </div>
+
+        <div class="content"></div>
+      </div>
+
+      <!-- 友情链接 -->
+      <div class="links2-box">
+        <div class="links-main">
+          <div class="links-title">
+            <div class="b"></div>
+            <div class="title">相关链接</div>
+          </div>
+          <div frag="窗口77" portletmode="simpleSiteAttri" class="links-list">
+            <div frag="窗口内容"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 底部版权 -->
+      <footer frag="面板版权">
+        <div frag="窗口版权" portletmode="simpleSiteAttri">
+          <p style="text-align: center">
+            Copyright@{站点版权} 地址：{站点地址} 邮编：438000
+          </p>
+          <p style="text-align: center">
+            电话{站点传真} Email:{站点Email}&nbsp;&nbsp;<a
+              href="http://zuzhibu.hgnu.edu.cn/"
+              >回到旧版</a
+            >
+          </p>
+        </div>
+        <style>
+          footer {
+            background-color: #3e3d3d !important;
+            /* height: 70px; */
+
+            font-size: 14px;
+            line-height: 24px;
+            text-align: center;
+            color: #fff;
+          }
+        </style>
+      </footer>
+    </div>
+    <!-- 热点新闻中心 -->
+    <script>
+      var dateTagRefs = [...document.querySelectorAll(".date-tag-ref")];
+      dateTagRefs.forEach((element) => {
+        let dateSplit = element.dataset.date.split("-");
+        element.querySelector(".day").textContent = dateSplit[2];
+        element.querySelector(".year_month").textContent =
+          dateSplit[0] + "-" + dateSplit[1];
+      });
+    </script>
+    <script src="./js/index.js"></script>
+  </body>
+</html>
+{{end}}

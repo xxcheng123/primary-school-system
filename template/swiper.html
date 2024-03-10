@@ -1,0 +1,20 @@
+{{ define "swiper.html" }}
+<div class="banner-swiper">
+  <div
+    class="banner-data"
+    style="position: absolute; width: 100%"
+  >
+  </div>
+  <div class="swiper banner-swiper-controller">
+    <div class="swiper-wrapper">
+      {{range .List}}
+      <div class="swiper-slide">
+        <img src="{{.Img}}" alt="宣传图" />
+      </div>
+      {{end}}
+    </div>
+    <div class="swiper-button-next swiper-button"></div>
+    <div class="swiper-button-prev swiper-button"></div>
+  </div>
+</div>
+{{end}}

@@ -1,0 +1,17 @@
+Name: school
+Host: 0.0.0.0
+Port: 9432
+
+SchoolRpcConf:
+  Endpoints:
+    - 192.168.21.12:9433
+  NonBlock: true
+
+Telemetry:
+  Name: school.api
+  Endpoint: https://zipkin-dev.xxcheng.cn/api/v2/spans
+  Sampler: 1.0
+  Batcher: zipkin
+
+Log:
+  Encoding: plain

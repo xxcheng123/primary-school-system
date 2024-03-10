@@ -1,0 +1,30 @@
+{{ define "category.html" }}
+<!-- 导航 -->
+<nav>
+    <div class="nav">
+        <ul
+                class="wp_nav"
+        >
+            {{range .List}}
+            <li class="nav-item i2">
+                <a href="/category/{{.Id}}" title="{{.Name}}" target="_self"
+                ><span class="item-name">{{.Name}}</span></a
+                ><i class="mark"></i>
+                {{ $length:=len .Child }}
+                {{if gt $length 0}}
+                <ul class="sub-nav">
+                    {{range .Child}}
+                    <li class="nav-item i2-1">
+                        <a href="/category/{{.Id}}" title="{{.Name}}" target="_self"
+                        ><span class="item-name">{{.Name}}</span></a
+                        ><i class="mark"></i>
+                    </li>
+                    {{end}}
+                </ul>
+                {{end}}
+            </li>
+            {{end}}
+        </ul>
+    </div>
+</nav>
+{{end}}
